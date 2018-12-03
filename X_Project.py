@@ -4,7 +4,7 @@ Questo è il main code del progetto richiesto per il midterm pratico di ingegner
 
 
 from linkedListDictionary import LinkedListDictionary
-from Dictionary import Dictionary
+from avlTree import AVLTree
 
 class Partizione:
     def __init__(self, min, max, b):
@@ -16,8 +16,7 @@ class Partizione:
         self.b = b
         self.d = int((max - min)/b) #da fare il modulo
         self.list = []
-        a = self.d + 2
-        for i in range(a):
+        for i in range(self.d + 2):
             self.list.append(LinkedListDictionary())
 
 
@@ -27,24 +26,31 @@ class Partizione:
                 self.list[self.d+1].insert(key, value)
                 print("elemtento inserito")
                 if(self.list[self.d+1].theList.len_list() == 6):
-                    print("funziona")
+                    pass
             else:
-                pass
+                self.list[self.d + 1].insert(key, value)
+                print("elemtento inserito")
         elif(key < self.min):
             if (self.checkType(self.list[self.d])):
                 self.list[self.d].insert(key, value)
                 print("elemtento inserito")
+                if (self.list[self.d + 1].theList.len_list() == 6):
+                    pass
             else:
-                pass
+                self.list[self.d + 1].insert(key, value)
+                print("elemtento inserito")
         else:
             for i in range(self.d):
                 if(key >= self.min + (i*self.b) and key < self.min + ((i + 1) * self.b)):
                     if(self.checkType(self.list[i])):
                         self.list[i].insert(key, value)
                         print("elemtento inserito")
+                        if (self.list[self.d + 1].theList.len_list() == 6):
+                            pass
                         break
                     else:
-                        pass
+                        self.list[self.d + 1].insert(key, value)
+                        print("elemtento inserito")
 
     def serch(self, key):
         pass
@@ -55,8 +61,6 @@ class Partizione:
 
     def checkType(self, l):
         if (type(l) is LinkedListDictionary):
-           # if(l.lung() == 5):
-            #    return False
             return True
         else:
             return False
