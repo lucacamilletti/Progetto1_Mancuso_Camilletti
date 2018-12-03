@@ -26,7 +26,7 @@ class Partizione:
                 self.list[self.d+1].insert(key, value)
                 print("elemtento inserito")
                 if(self.list[self.d+1].theList.len_list() == 6):
-                    pass
+                    self.changeAVL(self.list[self.d+1])
             else:
                 self.list[self.d + 1].insert(key, value)
                 print("elemtento inserito")
@@ -34,10 +34,10 @@ class Partizione:
             if (self.checkType(self.list[self.d])):
                 self.list[self.d].insert(key, value)
                 print("elemtento inserito")
-                if (self.list[self.d + 1].theList.len_list() == 6):
-                    pass
+                if (self.list[self.d].theList.len_list() == 6):
+                    self.changeAVL(self.list[self.d])
             else:
-                self.list[self.d + 1].insert(key, value)
+                self.list[self.d].insert(key, value)
                 print("elemtento inserito")
         else:
             for i in range(self.d):
@@ -45,11 +45,11 @@ class Partizione:
                     if(self.checkType(self.list[i])):
                         self.list[i].insert(key, value)
                         print("elemtento inserito")
-                        if (self.list[self.d + 1].theList.len_list() == 6):
-                            pass
+                        if (self.list[i].theList.len_list() == 6):
+                            self.changeAVL(self.list[i])
                         break
                     else:
-                        self.list[self.d + 1].insert(key, value)
+                        self.list[i].insert(key, value)
                         print("elemtento inserito")
 
     def serch(self, key):
@@ -64,6 +64,17 @@ class Partizione:
             return True
         else:
             return False
+
+
+    def changeAVL(self, list):
+        avlTree = AVLTree()
+        self.l = list
+        current = self.l.theList.first
+        while current != None:
+            key = current.elem[0]
+            value = current.elem[1]
+            avlTree.insert(key, value)
+            current = current.next
 
 
 if __name__ == "__main__":
