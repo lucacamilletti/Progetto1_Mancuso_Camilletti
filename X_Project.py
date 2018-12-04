@@ -5,6 +5,7 @@ Questo è il main code del progetto richiesto per il midterm pratico di ingegner
 from Dictionary import Dictionary
 from linkedListDictionary import LinkedListDictionary
 from avlTree import AVLTree
+from Stack import PilaArrayList
 from binarySearchTree import BinarySearchTree
 
 class Partizione:
@@ -27,7 +28,10 @@ class Partizione:
             self.list[pos].insert(key, value)
             print("elemtento inserito")
             if (self.list[pos].theList.len_list() == 6):
-                self.changeAVL(self.list[pos], pos)
+                avl = self.changeAVL(self.list[pos])
+                del self.list[pos]  # possibile usare entrambi i metodi
+                self.list.insert(pos, avl)
+                # self.list[pos] = avl
         else:
             self.list[pos].insert(key, value)
             print("elemtento inserito")
@@ -48,8 +52,11 @@ class Partizione:
         else:
             self.list[pos].delete(key)
             print("elemtento eliminato")
-            if (self.list[pos].theList.len_list() == 6):
-                pass
+            if (self.list[pos].size() == 6):
+                linked = self.changeInList(self.list[pos])
+                del self.list[pos]  # possibile usare entrambi i metodi
+                self.list.insert(pos, linked)
+                # self.list[i] = avlTree
 
     def checkType(self, l):
         if (type(l) is LinkedListDictionary):
@@ -58,7 +65,7 @@ class Partizione:
             return False
 
 
-    def changeAVL(self, list, i):
+    def changeAVL(self, list):
         avlTree = AVLTree()
         self.l = list
         current = self.l.theList.first
@@ -67,14 +74,17 @@ class Partizione:
             value = current.elem[1]
             avlTree.insert(key, value)
             current = current.next
-        del self.list[i]                #possibile usare entrambi i metodi
-        self.list.insert(i, avlTree)
-        #self.list[i] = avlTree
 
-    def changeInList(self, list, i):
+        return avlTree
+
+    def changeInList(self, lis):
         linkedList = LinkedListDictionary()
-        self.l = list
+        for i in range(5):
+            s = lis.tree.root
+            linkedList.insert(s.info[0], s.info[1])
+            lis.balDelete(s)
 
+        return linkedList
 
     def find_list(self, key):
         if (key >= self.max):
@@ -106,6 +116,13 @@ if __name__ == "__main__":
     dic.insert_main(28, "prova 2")
 
     dic.search_main(26)
+
+    dic.delete_main(28)
+    dic.delete_main(27)
+    dic.delete_main(26)
+    dic.delete_main(25)
+    dic.delete_main(24)
+
 
 
     if type(dic.list[3]) is AVLTree:

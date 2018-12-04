@@ -200,7 +200,7 @@ class BinaryTree(Tree):
         stack = PilaArrayList()
         if self.root is not None:
             stack.push([self.root, 0])  # pila di liste di due elementi [il nodo, il livello occupato dal nodo]
-            print("-- Tree --")
+            print("-- Tree --" )
         else:
             print("Empty tree!")
             return
