@@ -27,7 +27,7 @@ class Partizione:
                 self.list[self.d+1].insert(key, value)
                 print("elemtento inserito")
                 if(self.list[self.d+1].theList.len_list() >= 6):
-                    self.changeAVL(self.list[self.d+1]) # non funziona
+                    self.changeAVL(self.list[self.d+1], self.d+1)
             else:
                 self.list[self.d + 1].insert(key, value)
                 print("elemtento inserito")
@@ -36,7 +36,7 @@ class Partizione:
                 self.list[self.d].insert(key, value)
                 print("elemtento inserito")
                 if (self.list[self.d].theList.len_list() == 6):
-                    self.changeAVL(self.list[self.d])
+                    self.changeAVL(self.list[self.d], self.d)
             else:
                 self.list[self.d].insert(key, value)
                 print("elemtento inserito")
@@ -47,7 +47,7 @@ class Partizione:
                         self.list[i].insert(key, value)
                         print("elemtento inserito")
                         if (self.list[i].theList.len_list() == 6):
-                            self.changeAVL(self.list[i])
+                            self.changeAVL(self.list[i], i)
                         break
                     else:
                         self.list[i].insert(key, value)
@@ -84,7 +84,7 @@ class Partizione:
             return False
 
 
-    def changeAVL(self, list):
+    def changeAVL(self, list, i = 0):
         avlTree = AVLTree()
         self.l = list
         current = self.l.theList.first
@@ -93,8 +93,9 @@ class Partizione:
             value = current.elem[1]
             avlTree.insert(key, value)
             current = current.next
-
-
+        del self.list[i]                #possibile usare entrambi i metodi
+        self.list.insert(i, avlTree)
+        #self.list[i] = avlTree
 
 
 if __name__ == "__main__":
