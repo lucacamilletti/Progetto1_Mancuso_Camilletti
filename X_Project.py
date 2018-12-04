@@ -21,61 +21,35 @@ class Partizione:
             self.list.append(LinkedListDictionary())
 
 
-    def insert1(self, key, value):
-        if(key >= self.max):
-            if (self.checkType(self.list[self.d+1])):
-                self.list[self.d+1].insert(key, value)
-                print("elemtento inserito")
-                if(self.list[self.d+1].theList.len_list() >= 6):
-                    self.changeAVL(self.list[self.d+1], self.d+1)
-            else:
-                self.list[self.d + 1].insert(key, value)
-                print("elemtento inserito")
-        elif(key < self.min):
-            if (self.checkType(self.list[self.d])):
-                self.list[self.d].insert(key, value)
-                print("elemtento inserito")
-                if (self.list[self.d].theList.len_list() == 6):
-                    self.changeAVL(self.list[self.d], self.d)
-            else:
-                self.list[self.d].insert(key, value)
-                print("elemtento inserito")
+    def insert_main(self, key, value):
+        pos = self.find_list(key)
+        if (self.checkType(self.list[pos])):
+            self.list[pos].insert(key, value)
+            print("elemtento inserito")
+            if (self.list[pos].theList.len_list() == 6):
+                self.changeAVL(self.list[pos], pos)
         else:
-            for i in range(self.d):
-                if(key >= self.min + (i*self.b) and key < self.min + ((i + 1) * self.b)):
-                    if(self.checkType(self.list[i])):
-                        self.list[i].insert(key, value)
-                        print("elemtento inserito")
-                        if (self.list[i].theList.len_list() == 6):
-                            self.changeAVL(self.list[i], i)
-                        break
-                    else:
-                        self.list[i].insert(key, value)
-                        print("elemtento inserito")
-                        break
+            self.list[pos].insert(key, value)
+            print("elemtento inserito")
 
-    def serch(self, key):               #da abbellire
-        if (key >= self.max):
-            if (self.checkType(self.list[self.d+1])):
-                print(self.list[self.d+1].search(key))
-            else:
-                print(self.list[self.d+1].search(key))
-        elif (key < self.min):
-            if (self.checkType(self.list[self.d])):
-                print(self.list[self.d].search(key))
-            else:
-                print(self.list[self.d].search(key))
+    def search_main(self, key):               #da abbellire
+        pos = self.find_list(key)
+        if (self.checkType(self.list[pos])):
+            print(self.list[pos].search(key))
         else:
-            for i in range(self.d):
-                if(key >= self.min + (i*self.b) and key < self.min + ((i + 1) * self.b)):
-                    if(self.checkType(self.list[i])):
-                        print(self.list[i].search(key))
-                        break
-                else:
-                    print(self.list[i].search(key))
+            print(self.list[pos].search(key))
 
-    def delete(self, key):
-        pass
+
+    def delete_main(self, key):
+        pos = self.find_list(key)
+        if (self.checkType(self.list[pos])):
+            self.list[pos].delete(key)
+            print("elemtento eliminato")
+        else:
+            self.list[pos].delete(key)
+            print("elemtento eliminato")
+            if (self.list[pos].theList.len_list() == 6):
+                pass
 
     def checkType(self, l):
         if (type(l) is LinkedListDictionary):
@@ -84,7 +58,7 @@ class Partizione:
             return False
 
 
-    def changeAVL(self, list, i = 0):
+    def changeAVL(self, list, i):
         avlTree = AVLTree()
         self.l = list
         current = self.l.theList.first
@@ -97,20 +71,41 @@ class Partizione:
         self.list.insert(i, avlTree)
         #self.list[i] = avlTree
 
+    def changeInList(self, list, i):
+        linkedList = LinkedListDictionary()
+        self.l = list
+
+
+    def find_list(self, key):
+        if (key >= self.max):
+            return self.d+1
+        elif (key < self.min):
+            return self.d
+        else:
+            for i in range(self.d):
+                if(key >= self.min + (i*self.b) and key < self.min + ((i + 1) * self.b)):
+                    return i
+
+    def print(self):
+        for i in range(self.d+2):
+            print(self.list[i])
+
 
 if __name__ == "__main__":
     dic = Partizione(1, 17, 8)
 
-    dic.insert1(19, "prova 2")
-    dic.insert1(20, "prova 2")
-    dic.insert1(21, "prova 2")
-    dic.insert1(22, "prova 2")
-    dic.insert1(23, "prova 2")
-    dic.insert1(24, "prova 2")
-    dic.insert1(25, "prova 2")
-    dic.insert1(26, "prova 2")
+    dic.insert_main(19, "prova 2")
+    dic.insert_main(20, "prova 2")
+    dic.insert_main(21, "prova 2")
+    dic.insert_main(22, "prova 2")
+    dic.insert_main(23, "prova 2")
+    dic.insert_main(24, "prova 2")
+    dic.insert_main(25, "prova 2")
+    dic.insert_main(26, "prova 2")
+    dic.insert_main(27, "prova 2")
+    dic.insert_main(28, "prova 2")
 
-    dic.serch(26)
+    dic.search_main(26)
 
 
     if type(dic.list[3]) is AVLTree:
@@ -118,3 +113,5 @@ if __name__ == "__main__":
 
     else:
         print("non funziona")
+
+    dic.print()
