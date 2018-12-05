@@ -2,11 +2,9 @@
 Questo è il main code del progetto richiesto per il midterm pratico di ingegneria degli algoritmi
 """
 
-from Dictionary import Dictionary
+
 from linkedListDictionary import LinkedListDictionary
 from avlTree import AVLTree
-from Stack import PilaArrayList
-from binarySearchTree import BinarySearchTree
 
 class Partizione:
     def __init__(self, min, max, b):
@@ -26,7 +24,7 @@ class Partizione:
         pos = self.find_list(key)
         if (self.checkType(self.list[pos])):
             self.list[pos].insert(key, value)
-            print("elemtento inserito")
+            #print("elemtento inserito")
             if (self.list[pos].theList.len_list() == 6):
                 avl = self.changeAVL(self.list[pos])
                 del self.list[pos]  # possibile usare entrambi i metodi
@@ -34,24 +32,24 @@ class Partizione:
                 # self.list[pos] = avl
         else:
             self.list[pos].insert(key, value)
-            print("elemtento inserito")
+            #print("elemtento inserito")
 
     def search_main(self, key):               #da abbellire
         pos = self.find_list(key)
         if (self.checkType(self.list[pos])):
-            print(self.list[pos].search(key))
+            return self.list[pos].search(key)
         else:
-            print(self.list[pos].search(key))
+            return self.list[pos].search(key)
 
 
     def delete_main(self, key):
         pos = self.find_list(key)
         if (self.checkType(self.list[pos])):
             self.list[pos].delete(key)
-            print("elemtento eliminato")
+            #print("elemtento eliminato")
         else:
             self.list[pos].delete(key)
-            print("elemtento eliminato")
+            #print("elemtento eliminato")
             if (self.list[pos].size() == 6):
                 linked = self.changeInList(self.list[pos])
                 del self.list[pos]  # possibile usare entrambi i metodi
@@ -102,7 +100,7 @@ class Partizione:
 
 
 if __name__ == "__main__":
-    dic = Partizione(1, 17, 8)
+    dic = Partizione(100, 1100, 10)
 
     dic.insert_main(19, "prova 2")
     dic.insert_main(20, "prova 2")
