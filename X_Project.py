@@ -84,7 +84,7 @@ class Partizione:
 
         return linkedList
 
-    def find_list(self, key):
+    '''def find_list(self, key):
         if (key >= self.max):
             return self.d+1
         elif (key < self.min):
@@ -92,7 +92,15 @@ class Partizione:
         else:
             for i in range(self.d):
                 if(key >= self.min + (i*self.b) and key < self.min + ((i + 1) * self.b)):
-                    return i
+                    return i'''
+
+    def find_list(self, key):
+        if (key >= self.max):
+            return self.d + 1
+        elif (key < self.min):
+            return self.d
+        else:
+            return int((key-self.min)/self.b)
 
     def print(self):
         for i in range(self.d+2):
