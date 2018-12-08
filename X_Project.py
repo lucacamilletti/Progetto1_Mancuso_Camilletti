@@ -10,7 +10,7 @@ class Partizione:
     def __init__(self, min, max, b):
         assert max>min, "Massimo minore di minimo. Inserire i valori correttamente"
         assert b>6, "B deve essere maggiore di 6!"
-        assert ((max-min)/b)%2==0, "B deve essere divisore di max - min"
+        assert (max-min)%b==0, "B deve essere divisore di max - min"
         self.max = max
         self.min = min
         self.b = b
@@ -84,15 +84,17 @@ class Partizione:
 
         return linkedList
 
-    '''def find_list(self, key):
-        if (key >= self.max):
-            return self.d+1
-        elif (key < self.min):
-            return self.d
-        else:
-            for i in range(self.d):
-                if(key >= self.min + (i*self.b) and key < self.min + ((i + 1) * self.b)):
-                    return i'''
+    '''
+        def find_list(self, key):
+            if (key >= self.max):
+                return self.d+1
+            elif (key < self.min):
+                return self.d
+            else:
+                for i in range(self.d):
+                    if(key >= self.min + (i*self.b) and key < self.min + ((i + 1) * self.b)):
+                        return i
+    '''
 
     def find_list(self, key):
         if (key >= self.max):
@@ -105,6 +107,7 @@ class Partizione:
     def print(self):
         for i in range(self.d+2):
             print(self.list[i])
+
 
 
 if __name__ == "__main__":
