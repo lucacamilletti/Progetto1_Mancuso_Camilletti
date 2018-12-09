@@ -1,4 +1,4 @@
-from X_Project import Partizione
+from Progetto_1 import Partizione
 from time import time
 import cProfile
 import pstats
