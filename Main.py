@@ -10,7 +10,7 @@ for k in f:
     for j in a:
         t = str(k)
         t2 = str(j)
-        print("Risultati per "+ t+ " elementi con partizione grandi "+ t2 + " : ")
+        print("Risultati per " + t + " elementi con partizione grandi "+ t2 + " : ")
         dic = Partizione(j, int(k/j)*j + j, j)
 
         start = time()
