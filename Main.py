@@ -46,3 +46,4 @@ for seq in range(1,2):
         cProfile.run('for i in range(k): dic[i]', 'fileOutput')
         print("\nDelete:")
         cProfile.run('for i in range(k): del dic[i]', 'fileOutput')
+
