@@ -5,9 +5,9 @@ import pstats
 a = [7, 10, 20, 40, 100]
 f = [1000, 5000, 10000, 30000, 50000, 80000, 100000]
 
-for seq in range(1,3):
+for seq in range(1,2):
     for k in f:
-        for j in a:
+        '''for j in a:
             t = str(k)
             t2 = str(j)
             print("Risultati per " + t + " elementi con partizione grandi "+ t2 + " : ")
@@ -35,4 +35,14 @@ for seq in range(1,3):
             p.strip_dirs().sort_stats("time").print_stats()
             temp_delete = time() - start
 
-            print(temp_delete)
+            print(temp_delete)'''
+
+        t = str(k)
+        dic = {}
+        print("Risultati per " + t + " elementi: ")
+        print("\nInserimento:")
+        cProfile.run('for i in range(k): dic[i] = i*2', 'fileOutput')
+        print("\nSearch:")
+        cProfile.run('for i in range(k): dic[i]', 'fileOutput')
+        print("\nDelete:")
+        cProfile.run('for i in range(k): del dic[i]', 'fileOutput')
